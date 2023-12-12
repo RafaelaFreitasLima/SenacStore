@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+import pymysql
+
+pymysql.version_info = (1, 4, 6, 'final', 0)
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,8 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'StoreApp',
 	'crispy_forms',
-	'crispy_bootstrap5'
-	]
+	'crispy_bootstrap5',
+    'cloudinary_storage',
+	'cloudinary'
+]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -83,8 +89,12 @@ WSGI_APPLICATION = 'SenacStore.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': '1c5C5-BDe6EHHAfCeH-61fGf6Abc-haB',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '48518',
     }
 }
 
@@ -142,3 +152,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rafaela.freitas_10@hotmail.com'
 EMAIL_HOST_PASSWORD = 'rcrp himh iztq vihz'
+
+#config do cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'your_cloud_name',
+    'API_KEY': 'your_api_key',
+    'API_SECRET': 'your_api_secret',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
