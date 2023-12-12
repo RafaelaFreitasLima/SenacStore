@@ -16,12 +16,24 @@
         </div>
     </header>
     <!-- Section-->
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <form action="" method="post">
-            {{ form_contato.as_p }}
-        </form>
-    </div>
-</section>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+           
+            {% if mensagem %}
+            <div class="alert alert-{% if 'Erro' in mensagem %}danger{% else %}success{% endif %}">
+              {{ mensagem }}
+            </div>
+            {% endif %}
 
-{% endblock Conteudo %}
+            <form action="{% url 'contato' %}" method="POST">
+                {% csrf_token %}
+                <div class="col-md-6 offset-md-3">
+                    {{ form_contato|crispy }}
+                    <input type="submit" value="Enviar" class="btn btn-dark">
+                </div>
+            </form>
+            
+        </div>
+    </section>
+
+{% endblock %}
