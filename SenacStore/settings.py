@@ -31,7 +31,12 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+# Para aceitar qualquer endereço ou específico da hospedagem.
+ALLOWED_HOSTS = ['*']    
+
+# Endereços aceitos para o envio de formulários
+CSRF_TRUSTED_ORIGINS  = ['*']
 
 
 # Application definition
@@ -47,7 +52,8 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'crispy_bootstrap5',
     'cloudinary_storage',
-	'cloudinary'
+	'cloudinary',
+    'whitenoise.runserver_nostatic'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -61,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'SenacStore.urls'
